@@ -1,10 +1,18 @@
 {
     "compilerOptions": {
-        "target": "ES2024",
-        "outDir": "./dist/scripts/",
-        "noEmitOnError": true
+      "target": "es6",                     // Versão do JavaScript gerado
+      "module": "commonjs",                // Sistema de módulo (Node.js usa commonjs)
+      "outDir": "./dist/scripts",                  // Diretório de saída dos arquivos JavaScript
+      "rootDir": "./src",                  // Diretório raiz dos arquivos TypeScript
+      "strict": true,                      // Habilita verificações mais rigorosas
+      "esModuleInterop": true              // Facilita a importação de módulos comuns
     },
     "include": [
-        "./src/**/*"
+      "src/**/*"                           // Inclui todos os arquivos TypeScript na pasta "src"
+    ],
+    "exclude": [
+      "node_modules",                      // Exclui a pasta "node_modules"
+      "**/*.test.ts"                       // Exclui arquivos de teste, se existirem
     ]
-}
+  }
+  

@@ -1,9 +1,3 @@
-let saldo = 4000;
-
-const elementoSaldo = document.querySelector(".saldo-valor .valor") as HTMLElement;
-if (elementoSaldo != null) {
-    elementoSaldo.textContent = saldo.toString();
-}
 const elementoForm = document.querySelector(".block-nova-transacao form") as HTMLFormElement;
 elementoForm.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -15,13 +9,13 @@ elementoForm.addEventListener("submit", function(event) {
     const inputValor = elementoForm.querySelector("#valor") as HTMLInputElement;
     const inputData = elementoForm.querySelector("#data") as HTMLInputElement;
 
-    let tipoTransacao: string = inputTipoTransacao.value;
+    let tipoTransacao: TipoTransacao = inputTipoTransacao.value as TipoTransacao;
     let valor: number = inputValor.valueAsNumber;
     let data: Date =  new Date(inputData.value);
 
-    if (tipoTransacao == "Depósito") {
+    if (tipoTransacao == TipoTransacao.DEPOSITO) {
         saldo += valor;
-    } else if (tipoTransacao == "Transferência" || tipoTransacao == "Pagamento de Boleto") {
+    } else if (tipoTransacao == TipoTransacao.TRANSFER || tipoTransacao == TipoTransacao.BOLETO) {
         saldo -= valor;
     } else {
         alert("Operação não autorizada!");
@@ -30,7 +24,7 @@ elementoForm.addEventListener("submit", function(event) {
 
     elementoSaldo.textContent = saldo.toString();
 
-    const novaTransacao = {
+    const novaTransacao: Transacao = {
         tipoTransacao: tipoTransacao,
         valor: valor,
         data: data
